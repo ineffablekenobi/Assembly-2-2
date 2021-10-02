@@ -1,0 +1,55 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    ARR DB 5,6,10,8,2,3
+    IND DB 2
+.CODE
+
+MAIN PROC
+    
+    MOV AX, @DATA
+    MOV DS, AX
+    MOV ES, AX
+    
+    ;INPUT FUNCTION AH -> 1 DATA SAVED AT AL
+    ;PRINT FUNCTION AH -> 2 SAVE DATA AT DL 
+    
+    ;;CALL INDEC
+    
+    MOV AH, 0
+
+    MOV AL, [ARR + 2] ;; INDIRECT ADRESSING
+    CALL OUTDEC
+    CALL PRINTLN
+    
+    MOV AL, ARR[2]
+    CALL OUTDEC
+    CALL PRINTLN
+    
+    MOV SI, 2
+    MOV AL, ARR[SI]
+    CALL OUTDEC
+    CALL PRINTLN
+    
+    MOV DI, 2
+    MOV AL, ARR[DI]
+    CALL OUTDEC
+    CALL PRINTLN
+    
+    LEA BX, ARR
+    MOV AL, 2
+    XLAT
+    CALL OUTDEC
+    CALL PRINTLN
+    
+        
+    RETURN:    
+    MOV AH, 4CH
+    INT 21H
+    MAIN ENDP
+
+INCLUDE INDEC.asm
+INCLUDE OUTDEC.asm
+INCLUDE NEWLINE.asm
+
+END MAIN

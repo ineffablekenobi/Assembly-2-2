@@ -1,0 +1,14 @@
+PRINTLN PROC
+    PUSH AX
+    PUSH DX         ;STORE THE VALUES OF REGISTERS
+    
+    MOV AH, 2
+    MOV DL, 0AH
+    INT 21H
+    MOV DL, 0DH
+    INT 21H	
+  
+    POP DX
+    POP AX          ;RESTORE THE VALUES OF REGISTERS
+    RET             ;RETURN
+PRINTLN ENDP         ;END OF PROC OUTDEC

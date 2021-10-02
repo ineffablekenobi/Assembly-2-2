@@ -1,0 +1,28 @@
+DISP_STR PROC NEAR
+    ; DISPLAY A STRING
+    ;INPUT SI = OFFSET O A STRING
+    ;BX = NUMBER OF CHARACTERS TO DISPLAY
+    ;OUTPUT:NONE
+    
+    PUSH AX
+    PUSH BX
+    PUSH CX
+    PUSH DX
+    PUSH SI
+    MOV CX, BX
+    JCXZ P_EXIT
+    CLD
+    MOV AH, 2
+    TOP:
+    LODSB  ;; DS:SI >> AL SI INCREMENTED
+    MOV DL, AL
+    INT 21H
+    LOOP TOP
+    P_EXIT:
+    POP SI
+    POP DX
+    POP CX
+    POP BX
+    POP AX
+    RET
+    DISP_STR ENDP
